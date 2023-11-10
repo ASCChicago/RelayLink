@@ -1,0 +1,5 @@
+{
+    "url": "https://asc-relay-auth.azurewebsites.net/",
+    "GETDATA": "getData",
+    "ADDITSNUMBER": "addData"
+}

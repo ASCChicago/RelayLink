@@ -1,0 +1,160 @@
+.App {
+  text-align: center;
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: url('./burhaniPark.jpeg') no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.logo-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  height: 172px;
+  margin-bottom: 10px;
+}
+
+.heading-title {
+  font-family: "Alice", serif;
+  color: #b98027;
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.motif-login {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  width: 90px;
+  margin-bottom: 10px;
+}
+
+.login-section {
+  background: #fff;
+  opacity: 0.95;
+  border-radius: 21px;
+  padding: 20px;
+  margin: 15px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-bottom: 25px;
+  max-width: 285px;
+}
+
+.error-section {
+  opacity: 0.95;
+  border-radius: 21px;
+  padding: 20px;
+  margin: 15px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-bottom: 25px;
+  max-width: 285px;
+  color: red;
+}
+
+.lbl-text {
+  font-size: 13px;
+  font-family: "Roboto", sans-serif;
+  text-align: left;
+  color: #0e4653;
+  opacity: 0.7;
+  margin-bottom: 3px;
+  margin-left: 15px;
+  padding-top: 10px;
+}
+
+.input-control {
+  width: 253px;
+  height: 35px;
+  border-radius: 50px;
+  padding: 5px;
+  font-size: 14px;
+  letter-spacing: 5px;
+  border: 1.5px solid #0e4653;
+  text-align: center;
+  outline-style: none;
+  margin-bottom: 2px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  text-align: center;
+  padding: 10px;
+}
+
+.login-button {
+  width: 160px;
+  height: 45px;
+  border-radius: 21px;
+  padding-left: 10px;
+  font-size: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #0e4653;
+  border: solid 1px #0e4653;
+  border-bottom: solid 5px #0e4653;
+  color: #fff;
+  transition: all .5s ease-in;
+  cursor: pointer;
+}
+
+.logout-button {
+  width: 160px;
+  height: 45px;
+  border-radius: 21px;
+  padding-left: 10px;
+  font-size: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  border: solid 1px #0e4653;
+  border-bottom: solid 5px #0e4653;
+  transition: all .5s ease-in;
+  cursor: pointer;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
