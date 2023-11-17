@@ -1,5 +1,5 @@
 const relayLink = (props) => {
-  const {logout} = props
+  const {logout ,isAdmin ,redirectToAdmin} = props
     return (
       <div>
         <iframe
@@ -19,6 +19,11 @@ const relayLink = (props) => {
         <div className='input-group'>
           <button className="logout-button" onClick={logout}>LOGOUT</button>
         </div>
+        { isAdmin &&
+          <div className='input-group'>
+            <button className="logout-button" onClick={redirectToAdmin}>Redirect To Admin Page</button>
+          </div>
+        }
       </div>
     )
 }

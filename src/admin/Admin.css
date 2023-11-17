@@ -1,0 +1,37 @@
+.data-table {
+  width: 300px
+}
+
+.admin-page {
+  background: #fff;
+  opacity: 0.95;
+  border-radius: 21px;
+  padding: 20px;
+  margin: 15px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.add-its-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-right: 20px;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+.pa-p-10 {
+  padding: 10px;
+}
+
+.pa-mt-10 {
+  margin-top: 10px;
+}
+
+.pa-left {
+  text-align: left;
+}

@@ -1,5 +1,7 @@
 {
-    "url": "https://asc-relay-auth.azurewebsites.net/",
-    "GETDATA": "getData",
-    "ADDITSNUMBER": "addData"
+    "url": "https://relaydb-auth.azurewebsites.net/",
+    "GETDATA": "getUser",
+    "ADDITSNUMBER": "addUser",
+    "GETMIQAT": "getMiqat",
+    "GETMIQATBYNAME": "getMiqatByName"
 }

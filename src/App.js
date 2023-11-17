@@ -1,12 +1,17 @@
 import './App.css';
-import RelayComponent from './components/index'
+import User from './user/User'
+import Admin from './admin/Admin'
+import { Routes, Route } from "react-router-dom";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <RelayComponent />
-    </div>
+      <div className="app">
+        <Routes>
+          <Route path="/" element={<User />} />
+          <Route path="/admin" element={<Admin />} />
+        </Routes>
+      </div>
   );
-}
+};
 
 export default App;

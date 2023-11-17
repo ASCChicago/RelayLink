@@ -28,7 +28,7 @@ const LoginPage = (props) => {
         </div>
 
         <div className="input-group">
-          <button className="login-button" disabled={isLoading} onClick={handleSubmit}> Login </button>
+            <button className="login-button" disabled={isLoading} onClick={handleSubmit} > {isLoading ? 'Loading' : 'Login'}</button>
         </div>
 
         {errorState && <ErrorStateComponent />}

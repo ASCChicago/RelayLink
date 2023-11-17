@@ -2,7 +2,7 @@ import React from 'react';
 import RelayLinkComponent from './relayLink';
 import LoginPage from './loginPage';
 import axios from 'axios';
-import  config from '../data/configData';
+import  config from '../../data/configData';
 
 class RelayComponent extends React.Component {
   constructor(props) {
@@ -12,6 +12,7 @@ class RelayComponent extends React.Component {
       ITSNumber: '',
       isLoading: false,
       errorState: false,
+      isAdmin: 0,
     }
 
     this.logout = this.logout.bind(this);
@@ -32,6 +33,7 @@ class RelayComponent extends React.Component {
       ITSNumber: '',
       isLoading: false,
       errorState: false,
+      isAdmin: 0,
     })
     window.sessionStorage.setItem("isLoggedIn", false)
   }
@@ -42,37 +44,37 @@ class RelayComponent extends React.Component {
     })
   }
 
+  redirectToAdmin() {
+    window.location.href = '/admin'
+  }
+
 
   handleSubmit() {
       this.setState({
         isLoading: true,
       })
 
-    // Handling with local json file
-      // if(ITSDATA.ITSNUMBERS.includes(Number(this.state.ITSNumber))) {
-      //   this.setState({
-      //     errorState: false,
-      //     isLoggedIn: true,
-      //     isLoading: false,
-      //   });
-      //   window.sessionStorage.setItem("isLoggedIn", true)
-      // } else {
-      //   this.setState({
-      //     errorState: true,
-      //     isLoggedIn: false,
-      //     isLoading: false,
-      //   });
-      //   window.sessionStorage.setItem("isLoggedIn", false)
-      // }
-
       //  Handling with ASC API
-      let test = config.url + config.GETDATA
-      axios.get(test).then(response => {
+      let getUserApi = config.url + config.GETDATA
+
+      axios.get(getUserApi).then(response => {
         this.setState({
           isLoading: false,
         })
 
-        let ValidITSNumber = response.data.includes(this.state.ITSNumber)
+        console.log(response.data)
+
+        let ValidITSNumber = false;
+        response.data.forEach( data => {
+          if (data.its_id === this.state.ITSNumber) {
+            ValidITSNumber = true;
+            this.setState({
+              errorState: false,
+              isLoggedIn: true,
+              isAdmin: data.is_admin,
+            });
+          }
+        })
 
         if (!ValidITSNumber) {
           this.setState({
@@ -81,15 +83,13 @@ class RelayComponent extends React.Component {
           });
           window.sessionStorage.setItem("isLoggedIn", false)
         } else {
-          this.setState({
-            errorState: false,
-            isLoggedIn: true,
-          });
-
           window.sessionStorage.setItem("isLoggedIn", true)
         }
       }).catch((error, data) => {
-        this.setState({errorState: true});
+        this.setState({
+          errorState: true,
+          isLoading: false,
+        });
       })
   }
 
@@ -99,7 +99,7 @@ class RelayComponent extends React.Component {
       <div>
         {
           this.state.isLoggedIn ?
-          <RelayLinkComponent logout={this.logout}/> :
+          <RelayLinkComponent logout={this.logout} isAdmin={this.state.isAdmin} redirectToAdmin={this.redirectToAdmin} /> :
            <LoginPage
             handleSubmit={this.handleSubmit}
             setITSNumber={this.setITSNumber}
