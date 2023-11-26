@@ -81,16 +81,12 @@ class RelayComponent extends React.Component {
   }
 
 
-  deleteButton(itsNumber) {
-    let nonDeletedData = []
-    this.state.ITSData.forEach(data => {
-      if(data.its_id !== itsNumber) {
-        nonDeletedData.push(data)
-      }
-    })
-
-    this.setState({
-      ITSData: nonDeletedData
+  deleteButton(data) {
+    let deleteDataUrl = config.url + config.DELETEUSER
+    axios.post(deleteDataUrl, { its_id: data.its_id, miqat_id: data.miqat_id }).then(response => {
+      this.getTableDataITS()
+    }).catch((error, data) => {
+      this.setState({errorState: true});
     })
   }
 

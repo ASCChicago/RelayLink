@@ -4,8 +4,8 @@ const AddITS = (props) => {
   const {MiqatData, handleITSChange, addITS, handleMiqatChange, miqatInput, errorITS ,itsInput} = props;
     return (
       <div className="add-its-container pa-p-10 ">
-        <div className="pa-p-10 pa-left">
-          Add for ITS
+        <div className="pa-py-10 pa-left">
+          ADD ITS DATA
         </div>
         <input type="text" id="itsNumber" name="fname" placeholder="Enter ITS Number" onChange={handleITSChange} value={itsInput}/><br/>
 
