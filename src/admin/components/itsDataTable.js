@@ -2,8 +2,8 @@ const ITSDataTable = (props) => {
   const {ITSData, deleteButton} = props;
     return (
       <div>
-        <div className="pa-p-10 pa-left">
-          RAZA for ITS
+        <div className="pa-py-10 pa-left">
+          RAZA FOR ITS
         </div>
         <table className="data-table">
           <thead>
@@ -11,6 +11,7 @@ const ITSDataTable = (props) => {
               <th className="pa-p-10">ID</th>
               <th className="pa-p-10">ITS Number</th>
               <th className="pa-p-10">DELETE ITS</th>
+              <th className="pa-p-10"> IS ADMIN</th>
             </tr>
           </thead>
           <tbody>
@@ -20,8 +21,9 @@ const ITSDataTable = (props) => {
                 <td className="pa-p-10">{index + 1}</td>
                 <td className="pa-p-10">{data.its_id}</td>
                 <td className="pa-p-10">
-                   <button className="delete-button" onClick={() => deleteButton(data.its_id)}> DELETE </button>
+                   <button className="delete-button" onClick={() => deleteButton(data)} disabled={data.is_admin}> DELETE </button>
                 </td>
+                <td> {data.is_admin ? 'Yes' : 'No'} </td>
               </tr>
             );
           })}
