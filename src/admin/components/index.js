@@ -4,7 +4,7 @@ import  config from '../../data/configData';
 import ITSDataTable from './itsDataTable';
 import AddITS from './addITS'
 import LogoutButton from '../../common/logoutButton'
-
+import BackButton from './backButton'
 
 class RelayComponent extends React.Component {
   constructor(props) {
@@ -26,10 +26,12 @@ class RelayComponent extends React.Component {
     this.addITS = this.addITS.bind(this);
     this.handleMiqatChange = this.handleMiqatChange.bind(this);
     this.getTableDataITS = this.getTableDataITS.bind(this);
+    this.redirectToRelay = this.redirectToRelay.bind(this);
   }
 
   componentDidMount() {
     let logInData = window.sessionStorage.getItem("isLoggedIn")
+
     this.setState({
       isLoggedIn: (logInData && logInData === 'true') ? true : false,
       isLoading: true,
@@ -72,6 +74,10 @@ class RelayComponent extends React.Component {
     })
   }
 
+  redirectToRelay() {
+    window.location.href = '/'
+  }
+
   handleITSChange(event) {
     this.setState({itsInput: event.target.value});
   }
@@ -97,7 +103,8 @@ class RelayComponent extends React.Component {
       isLoading: false,
       errorState: false,
     })
-    window.sessionStorage.setItem("isLoggedIn", false)
+    window.sessionStorage.removeItem("isLoggedIn")
+    window.sessionStorage.removeItem("isAdmin")
     window.location.href = '/';
 
   }
@@ -138,24 +145,31 @@ class RelayComponent extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <div className='admin-page'>
-          <AddITS
-            MiqatData={this.state.MiqatData}
-            handleITSChange={this.handleITSChange}
-            addITS={this.addITS}
-            handleMiqatChange={this.handleMiqatChange}
-            miqatInput={this.state.miqatInput}
-            errorITS={this.state.errorITS}
-            itsInput={this.state.itsInput}
-            />
-          <ITSDataTable ITSData={this.state.ITSData} deleteButton={this.deleteButton} />
+    let adminData = window.sessionStorage.getItem("isAdmin")
 
+    if (adminData && adminData === 'false' ) {
+        window.location.href = '/';
+    } else {
+      return (
+        <div>
+          <div className='admin-page'>
+            <AddITS
+              MiqatData={this.state.MiqatData}
+              handleITSChange={this.handleITSChange}
+              addITS={this.addITS}
+              handleMiqatChange={this.handleMiqatChange}
+              miqatInput={this.state.miqatInput}
+              errorITS={this.state.errorITS}
+              itsInput={this.state.itsInput}
+              />
+            <ITSDataTable ITSData={this.state.ITSData} deleteButton={this.deleteButton} />
+
+          </div>
+          <LogoutButton logout={this.logout} />
+          <BackButton redirectToRelay={this.redirectToRelay} />
         </div>
-        <LogoutButton logout={this.logout} />
-      </div>
-    )
+      )
+    }
   }
 }
 
