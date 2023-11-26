@@ -3,5 +3,6 @@
     "GETDATA": "getUser",
     "ADDITSNUMBER": "addUser",
     "GETMIQAT": "getMiqat",
-    "GETMIQATBYNAME": "getMiqatByName"
+    "GETMIQATBYNAME": "getMiqatByName",
+    "DELETEUSER": "deleteUser"
 }

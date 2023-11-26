@@ -28,6 +28,32 @@ table, th, td {
   padding: 10px;
 }
 
+.pa-px-10 {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.pa-py-10 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.pa-pr-10 {
+  padding-right: 10px;
+}
+
+.pa-pl-10 {
+  padding-left: 10px;
+}
+
+.pa-pt-10 {
+  padding-top: 10px;
+}
+
+.pa-pb-10 {
+  padding-bottom: 10px;
+}
+
 .pa-mt-10 {
   margin-top: 10px;
 }
