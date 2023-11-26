@@ -1,12 +1,12 @@
 const relayLink = (props) => {
   const {logout ,isAdmin ,redirectToAdmin} = props
     return (
-      <div>
+      <div class="relay-link-container">
         <iframe
           title="relayLink"
           src="https://player.castr.com/live_43c64a10a70f11ed8dff5b542a72e2fe"
-          width="100%"
-          style={{aspectRatio: 16/9, minHeight: '340px'}}
+          class="relay-link"
+          style={{aspectRatio: 16/9}}
           frameBorder="0"
           scrolling="no"
           allow="autoplay"

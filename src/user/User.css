@@ -29,6 +29,27 @@
   color: #61dafb;
 }
 
+.user-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.relay-link-container { 
+  width: 100%;
+}
+
+.relay-link {
+  width: 80%
+}
+
+@media screen and (max-width: 1200px) {
+  .relay-link {
+    width: 100%;
+  }
+}
+
 .logo-image {
   display: block;
   margin-left: auto;

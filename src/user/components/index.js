@@ -96,7 +96,7 @@ class RelayComponent extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="user-container">
         {
           this.state.isLoggedIn ?
           <RelayLinkComponent logout={this.logout} isAdmin={this.state.isAdmin} redirectToAdmin={this.redirectToAdmin} /> :
