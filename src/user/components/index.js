@@ -12,7 +12,7 @@ class RelayComponent extends React.Component {
       ITSNumber: '',
       isLoading: false,
       errorState: false,
-      isAdmin: 0,
+      isAdmin: false,
     }
 
     this.logout = this.logout.bind(this);
@@ -22,8 +22,10 @@ class RelayComponent extends React.Component {
 
   componentDidMount() {
     let logInData = window.sessionStorage.getItem("isLoggedIn")
+    let adminData = window.sessionStorage.getItem("isAdmin")
     this.setState({
       isLoggedIn: (logInData && logInData === 'true') ? true : false,
+      isAdmin: (adminData && adminData === 'true') ? true : false,
     })
   }
 
@@ -33,9 +35,10 @@ class RelayComponent extends React.Component {
       ITSNumber: '',
       isLoading: false,
       errorState: false,
-      isAdmin: 0,
+      isAdmin: false,
     })
-    window.sessionStorage.setItem("isLoggedIn", false)
+    window.sessionStorage.removeItem("isLoggedIn")
+    window.sessionStorage.removeItem("isAdmin")
   }
 
   setITSNumber(value) {
@@ -62,12 +65,12 @@ class RelayComponent extends React.Component {
           isLoading: false,
         })
 
-        console.log(response.data)
-
         let ValidITSNumber = false;
+        let isAdminData = false;
         response.data.forEach( data => {
           if (data.its_id === this.state.ITSNumber) {
             ValidITSNumber = true;
+            isAdminData = data.is_admin;
             this.setState({
               errorState: false,
               isLoggedIn: true,
@@ -84,6 +87,7 @@ class RelayComponent extends React.Component {
           window.sessionStorage.setItem("isLoggedIn", false)
         } else {
           window.sessionStorage.setItem("isLoggedIn", true)
+          window.sessionStorage.setItem("isAdmin", isAdminData)
         }
       }).catch((error, data) => {
         this.setState({
