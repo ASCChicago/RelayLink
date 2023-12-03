@@ -93,6 +93,8 @@ class RelayComponent extends React.Component {
     });
     window.sessionStorage.setItem("isLoggedIn", true)
     window.sessionStorage.setItem("isAdmin", user.is_admin)
+    window.sessionStorage.setItem("userId", user.id)
+    window.sessionStorage.setItem("miqatId", user.miqat_id)
     sendLoginEvent()
   }
 

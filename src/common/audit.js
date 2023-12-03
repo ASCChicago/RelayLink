@@ -16,8 +16,8 @@ const browser = [
 function sendAuditEvent(fields) {
     let url = config.url + config.ADDAUDIT
     return axios.post(url, {
-        its_id: fields["its_id"] || 7,
-        miqat_id: fields["miqat_id"] || 27,
+        its_id: window.sessionStorage.getItem("userId"),
+        miqat_id: window.sessionStorage.getItem("miqatId"),
         event_type: fields.event_type || "INVALID",
         device_type: device,
         browser_type: browser
