@@ -4,5 +4,6 @@
     "ADDITSNUMBER": "addUser",
     "GETMIQAT": "getMiqat",
     "GETMIQATBYNAME": "getMiqatByName",
-    "DELETEUSER": "deleteUser"
+    "DELETEUSER": "deleteUser",
+    "ADDAUDIT": "addAudit"
 }

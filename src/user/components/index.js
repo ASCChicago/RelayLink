@@ -3,6 +3,7 @@ import RelayLinkComponent from './relayLink';
 import LoginPage from './loginPage';
 import axios from 'axios';
 import  config from '../../data/configData';
+import { sendLoginEvent, sendLogoutEvent } from '../../common/audit';
 
 class RelayComponent extends React.Component {
   constructor(props) {
@@ -31,7 +32,7 @@ class RelayComponent extends React.Component {
 
   logout() {
     this.setState({
-      isLoggedIn:false,
+      isLoggedIn: false,
       ITSNumber: '',
       isLoading: false,
       errorState: false,
@@ -39,6 +40,7 @@ class RelayComponent extends React.Component {
     })
     window.sessionStorage.removeItem("isLoggedIn")
     window.sessionStorage.removeItem("isAdmin")
+    sendLogoutEvent()
   }
 
   setITSNumber(value) {
@@ -58,43 +60,50 @@ class RelayComponent extends React.Component {
       })
 
       //  Handling with ASC API
-      let getUserApi = config.url + config.GETDATA
-
-      axios.get(getUserApi).then(response => {
+      let getUserAPI = config.url + config.GETDATA
+      axios.get(getUserAPI).then(response => {
         this.setState({
           isLoading: false,
         })
 
-        let ValidITSNumber = false;
-        let isAdminData = false;
-        response.data.forEach( data => {
-          if (data.its_id === this.state.ITSNumber) {
-            ValidITSNumber = true;
-            isAdminData = data.is_admin;
-            this.setState({
-              errorState: false,
-              isLoggedIn: true,
-              isAdmin: data.is_admin,
-            });
-          }
-        })
+        console.log(response.data)
 
-        if (!ValidITSNumber) {
-          this.setState({
-            errorState: true,
-            isLoggedIn: false,
-          });
-          window.sessionStorage.setItem("isLoggedIn", false)
+        let user = response.data
+          .filter(user => user.its_id === this.state.ITSNumber)
+          .pop()
+
+        if (!user) {
+          this.handleLoginFail();
         } else {
-          window.sessionStorage.setItem("isLoggedIn", true)
-          window.sessionStorage.setItem("isAdmin", isAdminData)
+          this.handleLoginSuccess(user);
         }
-      }).catch((error, data) => {
+      }).catch(() => {
         this.setState({
-          errorState: true,
           isLoading: false,
-        });
+        })
+        this.handleLoginFail();
       })
+  }
+
+  handleLoginSuccess(user) {
+    this.setState({
+      errorState: false,
+      isLoggedIn: true,
+      isAdmin: user.is_admin,
+    });
+    window.sessionStorage.setItem("isLoggedIn", true)
+    window.sessionStorage.setItem("isAdmin", user.is_admin)
+    window.sessionStorage.setItem("userId", user.id)
+    window.sessionStorage.setItem("miqatId", user.miqat_id)
+    sendLoginEvent()
+  }
+
+  handleLoginFail() {
+    this.setState({
+      errorState: true,
+      isLoggedIn: false,
+    });
+    window.sessionStorage.setItem("isLoggedIn", false)
   }
 
 
