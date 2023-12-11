@@ -162,7 +162,7 @@ class RelayComponent extends React.Component {
               errorITS={this.state.errorITS}
               itsInput={this.state.itsInput}
               />
-            <ITSDataTable ITSData={this.state.ITSData} deleteButton={this.deleteButton} />
+            <ITSDataTable ITSData={this.state.ITSData} deleteButton={this.deleteButton} MiqatData={this.state.MiqatData}/>
 
           </div>
           <LogoutButton logout={this.logout} />
