@@ -3,6 +3,9 @@ import axios from 'axios';
 import UAParser from 'ua-parser-js';
 
 const parser = new UAParser()
+console.log(parser);
+console.log(parser.getDevice());
+console.log(parser.getOS());
 const device = [
     parser.getDevice().vendor || "UNKNOWN",
     parser.getDevice().model || "UNKNOWN"
@@ -11,6 +14,11 @@ const device = [
 const browser = [
     parser.getBrowser().name || "UNKNOWN",
     parser.getBrowser().version || "UNKNOWN"
+].join("-")
+
+const os = [
+    parser.getOS().name || "UNKNOWN",
+    parser.getOS().version || "UNKNOWN"
 ].join("-")
 
 function sendAuditEvent(fields) {
