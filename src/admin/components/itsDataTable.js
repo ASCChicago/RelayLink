@@ -10,8 +10,10 @@ const ITSDataTable = (props) => {
             <tr>
               <th className="pa-p-10">ID</th>
               <th className="pa-p-10">ITS Number</th>
+              <th className="pa-p-10">FIRST NAME</th>
+              <th className="pa-p-10">LAST NAME</th>
               <th className="pa-p-10">MIQAAT</th>
-              <th className="pa-p-10"> IS ADMIN</th>
+              <th className="pa-p-10">IS ADMIN</th>
               <th className="pa-p-10">DELETE ITS</th>
             </tr>
           </thead>
@@ -22,6 +24,8 @@ const ITSDataTable = (props) => {
               <tr key={index + 1}>
                 <td className="pa-p-10">{index + 1}</td>
                 <td className="pa-p-10">{data.its_id}</td>
+                <td className="pa-p-10">{data.First_Name}</td>
+                <td className="pa-p-10">{data.Surname}</td>
                 <td className="pa-p-10">{miqat_data.miqat_name}</td>
                 <td> {data.is_admin ? 'Yes' : 'No'} </td>
                 <td className="pa-p-10">
