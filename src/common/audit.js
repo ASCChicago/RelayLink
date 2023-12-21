@@ -3,9 +3,6 @@ import axios from 'axios';
 import UAParser from 'ua-parser-js';
 
 const parser = new UAParser()
-console.log(parser);
-console.log(parser.getDevice());
-console.log(parser.getOS());
 const device = [
     parser.getDevice().vendor || "UNKNOWN",
     parser.getDevice().model || "UNKNOWN"
@@ -28,7 +25,8 @@ function sendAuditEvent(fields) {
         miqat_id: window.sessionStorage.getItem("miqatId"),
         event_type: fields.event_type || "INVALID",
         device_type: device,
-        browser_type: browser
+        browser_type: browser,
+        operating_system: os
     })
 }
 

@@ -66,8 +66,6 @@ class RelayComponent extends React.Component {
           isLoading: false,
         })
 
-        console.log(response.data)
-
         let user = response.data
           .filter(user => user.its_id === this.state.ITSNumber)
           .pop()
