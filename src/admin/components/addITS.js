@@ -20,7 +20,7 @@ const AddITS = (props) => {
 
         <label class="pa-left pa-py-10">
         <input name="Admin" type="checkbox" checked={adminInput} onChange={handleAdminChange}/>
-        Admin
+        Is Admin
         </label>
 
         <button className="add-button pa-mt-10" onClick={addITS}> ADD </button>

@@ -128,6 +128,7 @@ class RelayComponent extends React.Component {
           let MiqatId = miqatRes.data[0].miqat_id
 
           let addUserUrl = config.url + config.ADDITSNUMBER
+
           await axios.post(addUserUrl,{
             its_id: this.state.itsInput,
             admin: this.state.adminInput,
