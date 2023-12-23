@@ -29,6 +29,8 @@ class RelayComponent extends React.Component {
     this.handleAdminChange = this.handleAdminChange.bind(this);
     this.getTableDataITS = this.getTableDataITS.bind(this);
     this.redirectToRelay = this.redirectToRelay.bind(this);
+
+    // Testing for yml file
   }
 
   componentDidMount() {
@@ -114,7 +116,7 @@ class RelayComponent extends React.Component {
 
   }
 
-  async addITS() { 
+  async addITS() {
       this.setState({
         errorITS: false
       })
