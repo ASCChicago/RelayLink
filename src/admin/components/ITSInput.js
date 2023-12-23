@@ -22,7 +22,7 @@ class ITSInput extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.value != prevProps.value) {
+        if (this.props.value !== prevProps.value) {
             this.setState({
                 textInput: this.props.value
             });
@@ -31,7 +31,7 @@ class ITSInput extends React.Component {
     }
 
     async search() {
-        if (this.state.textInput.length == 0) {
+        if (this.state.textInput.length === 0) {
             this.setState({
                 searchResults: []
             })
