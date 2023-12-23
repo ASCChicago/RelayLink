@@ -25,7 +25,8 @@ class ITSInput extends React.Component {
         if (this.props.value != prevProps.value) {
             this.setState({
                 textInput: this.props.value
-             });
+            });
+            this.potential_its_id = undefined
         }
     }
 
