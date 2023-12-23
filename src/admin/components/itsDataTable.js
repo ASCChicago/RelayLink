@@ -19,13 +19,13 @@ const ITSDataTable = (props) => {
           <tbody>
             {ITSData.map(( data, index ) => {
             let miqat_data = MiqatData.find((element) => element.id === data.miqat_id)
-            let fullname = data.First_Prefix + " " + data.First_Name + " " + data.Surname
+            let fullname = [data.First_Prefix, data.First_Name, data.Surname].join(" ")
             return (
               <tr key={index + 1}>
                 <td className="pa-p-10">{index + 1}</td>
                 <td className="pa-p-10">{data.its_id}</td>
                 <td className="pa-p-10">{fullname}</td>
-                <td className="pa-p-10">{miqat_data?.miqat_name || "??"}</td>
+                <td className="pa-p-10">{miqat_data?.miqat_name || "NA"}</td>
                 <td> {data.is_admin ? 'Yes' : 'No'} </td>
                 <td className="pa-p-10">
                    <button className="delete-button" onClick={() => deleteButton(data)} disabled={data.is_admin}>DELETE</button>

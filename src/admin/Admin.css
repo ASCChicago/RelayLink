@@ -30,6 +30,41 @@
   cursor: pointer;
 }
 
+.its-input {
+  position: relative;
+}
+
+.its-input-text {
+  width: 100%;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+.its-input-dropdown {
+  position: absolute;
+  width: 100%;
+  list-style-type: none;
+  padding: 0;
+  background: lightgray;
+  overflow-y: scroll;
+  max-height: 300px;
+  z-index: 99;
+  margin: 0;
+}
+
+.its-input-dropdown-entry {
+  text-align: left;
+  border-bottom: 1px solid gray;
+  padding: 5px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.its-input-dropdown-entry:hover {
+  background: lightblue;
+}
+
 table, th, td {
   border: 1px solid black;
 }

@@ -18,7 +18,7 @@ class RelayComponent extends React.Component {
       errorITS: false,
       itsInput: '',
       miqatInput: '',
-      adminInput: false
+      adminInput: false,
     }
 
     this.logout = this.logout.bind(this);
@@ -80,8 +80,8 @@ class RelayComponent extends React.Component {
     window.location.href = '/'
   }
 
-  handleITSChange(event) {
-    this.setState({itsInput: event.target.value});
+  handleITSChange(its) {
+    this.setState({itsInput: its});
   }
 
   handleMiqatChange(event) {
