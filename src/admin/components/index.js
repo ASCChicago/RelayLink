@@ -153,7 +153,7 @@ class RelayComponent extends React.Component {
         window.location.href = '/';
     } else {
       return (
-        <div>
+        <div class="admin-page-container">
           <div className='admin-page'>
             <AddITS
               MiqatData={this.state.MiqatData}
