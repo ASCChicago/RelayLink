@@ -4,7 +4,7 @@
   width: 100vw;
   background-size: cover;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background: url('./burhaniPark.jpeg') no-repeat;
