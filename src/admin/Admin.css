@@ -57,6 +57,10 @@
   cursor: pointer;
 }
 
+.its-input-dropdown-entry:last-child {
+  border-bottom: none;
+}
+
 .its-input-dropdown-entry:hover {
   background: lightblue;
 }

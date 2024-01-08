@@ -15,10 +15,12 @@ class ITSInput extends React.Component {
 
         this.handleTextChange = this.handleTextChange.bind(this)
         this.handleTextFocusOut = this.handleTextFocusOut.bind(this)
+        this.handleTextFocusIn = this.handleTextFocusIn.bind(this)
         this.setPotentialITS = this.setPotentialITS.bind(this)
         this.clearPotentialITS = this.clearPotentialITS.bind(this)
         this.search = this.search.bind(this)
         this.debouncedSearch = _.debounce(this.search, 500)
+        this.focused = false
     }
 
     componentDidUpdate(prevProps) {
@@ -42,7 +44,9 @@ class ITSInput extends React.Component {
         const response = await axios.get(searchURL, { params: { param: this.state.textInput }})
         const results = response.data;
         this.setState({
-            searchResults: results
+            // If the user clicks out of the textbox before the search response is received,
+            // we don't want to display the search results
+            searchResults: this.focused ? results : []
         })
     }
 
@@ -55,12 +59,18 @@ class ITSInput extends React.Component {
         this.debouncedSearch()
     }
 
+    handleTextFocusIn() {
+        this.focused = true
+    }
+
     handleTextFocusOut() {
+        this.focused = false
+
         this.setState({
             searchResults: []
         })
 
-        // if defined, it means the textbox lost focus because
+        // If defined, it means the textbox lost focus because
         // the user clicked on an entry in the dropdown
         if (this.potential_its_id) {
             this.setState({
@@ -88,6 +98,7 @@ class ITSInput extends React.Component {
                     placeholder="Enter Name or ITS"
                     onChange={this.handleTextChange}
                     onBlur={this.handleTextFocusOut}
+                    onFocus={this.handleTextFocusIn}
                     value={this.state.textInput}
                     autocomplete="off"
                 />
