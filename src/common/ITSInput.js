@@ -1,7 +1,7 @@
 import React from 'react'
 import _ from 'lodash'
 import axios from 'axios'
-import config from '../../data/configData';
+import config from '../data/configData';
 
 class ITSInput extends React.Component {
 

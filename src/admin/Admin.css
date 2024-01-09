@@ -1,11 +1,50 @@
 .App {
   justify-content: unset;
-  align-items: unset;
+  align-items: center;
   overflow-x: scroll;
 }
 
 .admin-page-container {
-  margin: auto;
+  margin: 0 auto;
+  min-width: 50%;
+}
+
+@media only screen and (max-width: 900px) {
+  .admin-page-container {
+    min-width: 100%;
+  }
+}
+
+.admin-page-nav-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center
+}
+
+.tab-manager-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  margin: 15px;
+  background: #fff;
+  opacity: 0.95;
+  border-radius: 21px;
+  padding: 10px;
+}
+
+.tab {
+  padding: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.tab:hover {
+  color: rgb(179, 120, 46);
+}
+
+.tab-active {
+  color: rgb(179, 120, 46);
 }
 
 .admin-page {
@@ -14,16 +53,19 @@
   border-radius: 21px;
   padding: 20px;
   margin: 15px;
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
 }
 
 .add-its-container {
   display: flex;
   justify-content: center;
-  flex-direction: column;
-  margin-right: 20px;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.add-its-element {
+  margin-right: 10px;
 }
 
 .its-input {
@@ -67,6 +109,10 @@
 
 table, th, td {
   border: 1px solid black;
+}
+
+.data-table {
+  width: 100%;
 }
 
 .back-button {

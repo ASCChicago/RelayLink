@@ -2,9 +2,6 @@ const ITSDataTable = (props) => {
   const {ITSData, deleteButton, MiqatData} = props;
     return (
       <div>
-        <div className="pa-py-10 pa-left">
-          RAZA FOR ITS
-        </div>
         <table className="data-table">
           <thead>
             <tr>
