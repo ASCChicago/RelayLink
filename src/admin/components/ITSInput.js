@@ -80,23 +80,23 @@ class ITSInput extends React.Component {
 
     render() {
         return (
-            <div class="its-input">
+            <div className="its-input">
                 <input
                     type="text"
-                    class="its-input-text"
+                    className="its-input-text"
                     name="search"
                     placeholder="Enter Name or ITS"
                     onChange={this.handleTextChange}
                     onBlur={this.handleTextFocusOut}
                     value={this.state.textInput}
-                    autocomplete="off"
+                    autoComplete="off"
                 />
-                <ul class="its-input-dropdown" onMouseLeave={this.clearPotentialITS}>
+                <ul className="its-input-dropdown" onMouseLeave={this.clearPotentialITS}>
                 {
                     this.state.searchResults.map(res => {
                         const fullname = [res.First_Prefix, res.First_Name, res.Surname].join(" ")
                         return (
-                            <li class="its-input-dropdown-entry"
+                            <li className="its-input-dropdown-entry"
                                 onMouseEnter={() => {this.setPotentialITS(res.its_id)}}>
                                 {res.its_id + ", " + fullname}
                             </li>

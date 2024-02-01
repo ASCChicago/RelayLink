@@ -14,11 +14,14 @@ class RelayComponent extends React.Component {
       isLoading: false,
       errorState: false,
       isAdmin: false,
+      forceLogout: true,
     }
 
     this.logout = this.logout.bind(this);
     this.setITSNumber = this.setITSNumber.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onBeforeUnload = this.onBeforeUnload.bind(this);
+    this.redirectToAdmin= this.redirectToAdmin.bind(this);
   }
 
   componentDidMount() {
@@ -27,7 +30,17 @@ class RelayComponent extends React.Component {
     this.setState({
       isLoggedIn: (logInData && logInData === 'true') ? true : false,
       isAdmin: (adminData && adminData === 'true') ? true : false,
+      forceLogout: true,
     })
+
+    console.log(this.state.forceLogout)
+    window.addEventListener('beforeunload', this.onBeforeUnload);
+  }
+
+  onBeforeUnload(e) {
+      if (this.state.forceLogout) {
+        this.logout();
+      }
   }
 
   logout() {
@@ -50,7 +63,12 @@ class RelayComponent extends React.Component {
   }
 
   redirectToAdmin() {
-    window.location.href = '/admin'
+    this.setState({
+      forceLogout: false,
+    })
+    setTimeout(() => {
+      window.location.href = '/admin'
+    }, 1000);
   }
 
 

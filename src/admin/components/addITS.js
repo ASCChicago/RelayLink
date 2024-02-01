@@ -16,13 +16,13 @@ const AddITS = (props) => {
         <select value={miqatInput} onChange={handleMiqatChange}>
           {MiqatData.map(( data, index ) => {
             return (
-                <option value={data.miqat_name}>{data.miqat_name}</option>
+                <option key={index + data.miqat_name} value={data.miqat_name}>{data.miqat_name}</option>
               );
             })
           }
         </select>
 
-        <label class="pa-left pa-py-10">
+        <label className="pa-left pa-py-10">
         <input name="Admin" type="checkbox" checked={adminInput} onChange={handleAdminChange}/>
         Is Admin
         </label>
