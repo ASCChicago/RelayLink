@@ -5,6 +5,7 @@ import ITSDataTable from './itsDataTable';
 import AddITS from './addITS'
 import LogoutButton from '../../common/logoutButton'
 import BackButton from './backButton'
+import { sendLogoutEvent } from '../../common/audit';
 
 class RelayComponent extends React.Component {
   constructor(props) {
@@ -19,6 +20,8 @@ class RelayComponent extends React.Component {
       itsInput: '',
       miqatInput: '',
       adminInput: false,
+      isAdmin: false,
+      forceLogout: true,
     }
 
     this.logout = this.logout.bind(this);
@@ -29,18 +32,22 @@ class RelayComponent extends React.Component {
     this.handleAdminChange = this.handleAdminChange.bind(this);
     this.getTableDataITS = this.getTableDataITS.bind(this);
     this.redirectToRelay = this.redirectToRelay.bind(this);
+    this.onBeforeUnload = this.onBeforeUnload.bind(this);
   }
 
   componentDidMount() {
     let logInData = window.sessionStorage.getItem("isLoggedIn")
+    let adminData = window.sessionStorage.getItem("isAdmin")
 
     this.setState({
       isLoggedIn: (logInData && logInData === 'true') ? true : false,
+      isAdmin: (adminData && adminData === 'true') ? true : false,
       isLoading: true,
       itsInput: '',
+      forceLogout: true,
     })
 
-    if (this.state.isLoggedIn) {
+    if (!(logInData && logInData === 'true' && adminData && adminData === 'true')) {
       window.location.href = '/';
     }
 
@@ -63,6 +70,17 @@ class RelayComponent extends React.Component {
     }).catch((error, data) => {
       this.setState({errorState: true});
     })
+
+    window.addEventListener('beforeunload', this.onBeforeUnload);
+  }
+
+  onBeforeUnload() {
+    if (this.state.forceLogout) {
+      this.logout()
+    }
+    this.setState({
+      forceLogout: true
+    })
   }
 
   getTableDataITS() {
@@ -77,7 +95,12 @@ class RelayComponent extends React.Component {
   }
 
   redirectToRelay() {
-    window.location.href = '/'
+    this.setState({
+      forceLogout: false,
+    })
+    setTimeout(() => {
+      window.location.href = '/';
+    }, 1000);
   }
 
   handleITSChange(its) {
@@ -108,13 +131,20 @@ class RelayComponent extends React.Component {
       isLoading: false,
       errorState: false,
     })
+
+    sendLogoutEvent()
     window.sessionStorage.removeItem("isLoggedIn")
     window.sessionStorage.removeItem("isAdmin")
-    window.location.href = '/';
 
+    this.setState({
+      forceLogout: false,
+    })
+    setTimeout(() => {
+      window.location.href = '/';
+    }, 1000);
   }
 
-  async addITS() { 
+  async addITS() {
       this.setState({
         errorITS: false
       })
@@ -147,33 +177,27 @@ class RelayComponent extends React.Component {
   }
 
   render() {
-    let adminData = window.sessionStorage.getItem("isAdmin")
+    return (
+      <div className="admin-page-container">
+        <div className='admin-page'>
+          <AddITS
+            MiqatData={this.state.MiqatData}
+            handleITSChange={this.handleITSChange}
+            addITS={this.addITS}
+            handleMiqatChange={this.handleMiqatChange}
+            handleAdminChange={this.handleAdminChange}
+            miqatInput={this.state.miqatInput}
+            errorITS={this.state.errorITS}
+            itsInput={this.state.itsInput}
+            adminInput={this.state.adminInput}
+            />
+          <ITSDataTable ITSData={this.state.ITSData} deleteButton={this.deleteButton} MiqatData={this.state.MiqatData}/>
 
-    if (adminData && adminData === 'false' ) {
-        window.location.href = '/';
-    } else {
-      return (
-        <div class="admin-page-container">
-          <div className='admin-page'>
-            <AddITS
-              MiqatData={this.state.MiqatData}
-              handleITSChange={this.handleITSChange}
-              addITS={this.addITS}
-              handleMiqatChange={this.handleMiqatChange}
-              handleAdminChange={this.handleAdminChange}
-              miqatInput={this.state.miqatInput}
-              errorITS={this.state.errorITS}
-              itsInput={this.state.itsInput}
-              adminInput={this.state.adminInput}
-              />
-            <ITSDataTable ITSData={this.state.ITSData} deleteButton={this.deleteButton} MiqatData={this.state.MiqatData}/>
-
-          </div>
-          <LogoutButton logout={this.logout} />
-          <BackButton redirectToRelay={this.redirectToRelay} />
         </div>
-      )
-    }
+        <LogoutButton logout={this.logout} />
+        <BackButton redirectToRelay={this.redirectToRelay} />
+      </div>
+    )
   }
 }
 
